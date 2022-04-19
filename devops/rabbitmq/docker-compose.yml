@@ -1,0 +1,20 @@
+version: "2.2"
+services:
+  rabbitmq3:
+    container_name: "rabbitmq"
+    image: rabbitmq:3.8-management-alpine
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - schedule-event-compose-network
+
+networks:
+  schedule-event-compose-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.57.0/24
